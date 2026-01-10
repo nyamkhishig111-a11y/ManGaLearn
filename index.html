@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>ManGaLearn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 
@@ -45,7 +45,7 @@
       color: #ffe5e5;
     }
 
-    /* --------------- INTRO / TEXT BLOCK --------------- */
+    /* --------------- CONTAINER / TEXT BLOCK --------------- */
     .container {
       display: inline-block;
       text-align: center;
@@ -60,17 +60,11 @@
       font-size: 28px;
       margin-bottom: 20px;
     }
-    .container p.mn {
+    .container p {
       font-size: 16px;
-      color: #333;
+      line-height: 1.6;
+      text-align: left;
       margin-bottom: 20px;
-      line-height: 1.6;
-    }
-    .container p.cn {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 18px;  
-      color: #666;
-      line-height: 1.6;
     }
 
     /* --------------- CONTACT BLOCK --------------- */
@@ -96,26 +90,14 @@
       transform: scale(1.05);
     }
 
-    /* --------------- MANAGA TEXT / Pinyin --------------- */
-    .manga-text {
-      max-width: 800px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 25px 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      text-align: left;
-      font-size: 18px;
-      line-height: 2;
-    }
-    .manga-text span.word {
+    /* --------------- TOOLTIP / MANGA TEXT --------------- */
+    span.word {
       cursor: pointer;
       position: relative;
       color: #d32f2f;
       font-weight: bold;
     }
-    /* Hover tooltip */
-    .manga-text span.word:hover::after {
+    span.word:hover::after {
       content: attr(data-pinyin) " - " attr(data-meaning);
       position: absolute;
       bottom: 120%;
@@ -131,24 +113,6 @@
       pointer-events: none;
       z-index: 10;
     }
-    /* Click tooltip */
-    .tooltip-click {
-      display: none;
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      padding: 8px 10px;
-      border-radius: 6px;
-      white-space: nowrap;
-      font-size: 14px;
-      z-index: 20;
-    }
-    .tooltip-active {
-      display: block;
-    }
 
     /* --------------- FOOTER --------------- */
     footer {
@@ -160,24 +124,10 @@
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 36px;
-      }
-      header p {
-        font-size: 16px;
-      }
-      header .cn {
-        font-size: 16px;
-      }
-      .container p.mn {
-        font-size: 14px;
-      }
-      .container p.cn {
-        font-size: 16px;
-      }
-      .manga-text {
-        font-size: 16px;
-      }
+      header h1 { font-size: 36px; }
+      header p { font-size: 16px; }
+      header .cn { font-size: 16px; }
+      .container p { font-size: 14px; }
     }
   </style>
 </head>
@@ -191,36 +141,31 @@
     <div class="cn">欢迎来到 ManGaLearn —— 用漫画学习中文</div>
   </header>
 
-  <!-- INTRO -->
+  <!-- INTRO + MANGA TEXT TOGETHER -->
   <div class="container">
     <h2>Бидний тухай</h2>
-    <p class="mn">
-      <strong>ManGaLearn</strong> бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан энгийн, интерактив веб сайт юм.<br>
-      Энд та Хятад хэл дээр манга уншиж, үгийн сангаа баяжуулж, дүрмийн мэдлэгээ сайжруулах боломжтой.<br>
-      Хятад–Монгол орчуулга, үгсийн тайлбар болон сонирхолтой дасгалуудтай тул хэлээ хөгжилтэй, үр дүнтэй аргаар сайжруулах боломжтой.
+    <p>
+      <span class="word" data-pinyin="Shì yí gè jiǎnjié, hùdòng de wǎngzhàn" data-meaning="энэ нь энгийн, интерактив веб сайт юм">ManGaLearn 是一个简洁、互动的网站</span>， 
+      <span class="word" data-pinyin="zhuān wèi xuéxí zhōngwén hé tígāo yuèdú nénglì ér shèjì" data-meaning="Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан">专为学习中文和提高阅读能力而设计</span>。
     </p>
-    <p class="cn">
-      <strong>ManGaLearn</strong> 是一个简洁、互动的网站，专为学习中文和提高阅读能力而设计。<br>
-      在这里，你可以阅读中文漫画，丰富词汇量，并提高语法知识。<br>
-      网站提供中蒙翻译、词汇注释和趣味练习，让你在轻松、有趣的方式中提高中文水平。
+    <p>
+      <span class="word" data-pinyin="Zài zhèlǐ" data-meaning="Эндээс">在这里</span>， 
+      <span class="word" data-pinyin="nǐ kěyǐ yuèdú zhōngwén mànhuà" data-meaning="Та Хятад хэлний манга унших боломжтой">你可以阅读中文漫画</span>， 
+      <span class="word" data-pinyin="fēngfù cíhuìliàng" data-meaning="Үгийн сангаа баяжуулах">丰富词汇量</span>， 
+      <span class="word" data-pinyin="bìng tígāo yǔfǎ zhīshi" data-meaning="Дүрмийн мэдлэгээ сайжруулах">并提高语法知识</span>。
     </p>
-  </div>
-
-  <!-- MANAGA TEXT EXAMPLE (NEW SENTENCES) -->
-  <div class="manga-text">
+    <p>
+      <span class="word" data-pinyin="Wǎngzhàn tígōng zhōng méng fānyì" data-meaning="Сайт нь Хятад–Монгол орчуулгатай">网站提供中蒙翻译</span>、 
+      <span class="word" data-pinyin="cíhuì zhùshì" data-meaning="Үгсийн тайлбартай">词汇注释</span> 
+      <span class="word" data-pinyin="hé qùwèi liànxí" data-meaning="Сонирхолтой дасгалуудтай">和趣味练习</span>， 
+      <span class="word" data-pinyin="ràng nǐ zài jiǎndān, yǒuqù de fāngshì zhōng tígāo zhōngwén shuǐpíng" data-meaning="хялбар, сонирхолтой аргаар Хятад хэлээ сайжруулах боломжтой">让你在简单、有趣的方式中提高中文水平</span>。
+    </p>
     <p>
       <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好？</span> 
-      <span class="word" data-pinyin="hé MángāLearn yīqǐ" data-meaning="ManGaLearn-тэй хамт">和 ManGaLearn 一起</span> 
+      <span class="word" data-pinyin="Wǒmen" data-meaning="Бүгдээрээ">我们</span> 
+      <span class="word" data-pinyin="hé MangaLearn yīqǐ" data-meaning="ManGaLearn-тэй хамтдаа">和 ManGaLearn 一起</span> 
       <span class="word" data-pinyin="kuàilè de" data-meaning="хөгжилтэйгээр">快乐地</span> 
-      <span class="word" data-pinyin="xuéxí yǔyán" data-meaning="хэлээ сайжруулах">学习语言！</span>
-      <span class="tooltip-click">Nǐ hǎo? - Сайн уу? | 和 ManGaLearn 一起 - ManGaLearn-тэй хамт | 快乐地 - хөгжилтэйгээр | 学习语言 - хэлээ сайжруулах</span>
-    </p>
-    <p>
-      <span class="word" data-pinyin="wǒmen" data-meaning="Бид">我们</span>，
-      <span class="word" data-pinyin="xǐhuān" data-meaning="дуртай">喜欢</span>
-      <span class="word" data-pinyin="dú mànhuà" data-meaning="манга унших">读漫画</span>
-      <span class="word" data-pinyin="xuéxí zhōngwén" data-meaning="Хятад хэл сурах">学习中文</span>
-      <span class="tooltip-click">我们喜欢读漫画 - Бид манга унших дуртай | 学习中文 - Хятад хэл сурах</span>
+      <span class="word" data-pinyin="xuéxí yǔyán" data-meaning="хэлээ сурцгаая!">学习语言！</span>
     </p>
   </div>
 
@@ -236,17 +181,5 @@
     © 2026 ManGaLearn • Created with ❤️
   </footer>
 
-  <script>
-    // CLICK tooltip
-    document.querySelectorAll('.manga-text span.word').forEach(word => {
-      word.addEventListener('click', () => {
-        const tooltip = word.nextElementSibling;
-        if(tooltip && tooltip.classList.contains('tooltip-click')) {
-          tooltip.classList.toggle('tooltip-active');
-        }
-      });
-    });
-  </script>
 </body>
 </html>
-
