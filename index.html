@@ -4,58 +4,163 @@
   <meta charset="UTF-8">
   <title>ManGaLearn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+
   <style>
+    /* --------------- GLOBAL --------------- */
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: #f4f4f9;
       color: #333;
-      line-height: 1.6;
+      line-height: 1.8;
     }
+    a {
+      text-decoration: none;
+      color: #ff4500;
+    }
+
+    /* --------------- HEADER --------------- */
     header {
       background: linear-gradient(135deg, #ff0000, #ff4d4d);
       color: white;
-      padding: 60px 20px;
+      padding: 70px 20px;
       text-align: center;
     }
     header h1 {
       margin: 0;
-      font-size: 42px;
+      font-size: 48px;
+      font-weight: 700;
     }
     header p {
-      font-size: 18px;
-      margin-top: 10px;
+      font-size: 20px;
+      margin-top: 12px;
     }
+    header .cn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 16px;
+      margin-top: 8px;
+      color: #ffe5e5;
+    }
+
+    /* --------------- INTRO / TEXT BLOCK --------------- */
     .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
+      text-align: center;
+      max-width: 850px;
+      margin: -30px auto 50px auto; 
+      background: #fff8f5;
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
-    .cn {
+    .container h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+    .container p.mn {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .container p.cn {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 16px;
       color: #666;
-      font-size: 14px;
-      margin-top: 10px;
     }
+
+    /* --------------- CONTACT BLOCK --------------- */
     .contact {
       background: #fff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-top: 40px;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       text-align: center;
+      max-width: 500px;
+      margin: 50px auto;
     }
     .contact a {
       display: inline-block;
-      margin: 10px;
-      text-decoration: none;
-      color: #ff6a00;
+      margin: 10px 15px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #ff4500;
+      transition: all 0.3s ease;
+    }
+    .contact a:hover {
+      color: #ff0000;
+      transform: scale(1.05);
+    }
+
+    /* --------------- MANAGA TEXT / Pinyin --------------- */
+    .manga-text {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      text-align: left;
+      font-size: 18px;
+      line-height: 2;
+    }
+    .manga-text span.word {
+      cursor: pointer;
+      position: relative;
+      color: #d32f2f;
       font-weight: bold;
     }
+    .manga-text span.word:hover {
+      text-decoration: underline;
+    }
+    .manga-text span.word::after {
+      content: attr(data-pinyin) " - " attr(data-meaning);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 5px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+    .manga-text span.word:hover::after {
+      opacity: 1;
+    }
+
+    /* --------------- FOOTER --------------- */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 25px;
       font-size: 14px;
-      color: #888;
+      color: #666;
+      background: #f4f4f4;
+    }
+
+    /* --------------- RESPONSIVE --------------- */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 36px;
+      }
+      header p {
+        font-size: 16px;
+      }
+      .container p.mn {
+        font-size: 16px;
+      }
+      .container p.cn {
+        font-size: 14px;
+      }
+      .manga-text {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -64,41 +169,49 @@
 
   <!-- HEADER -->
   <header>
-    <h1> ManGaLearn-д тавтай морил</h1>
+    <h1>ManGaLearn-д тавтай морил</h1>
     <p>Манга уншаад Хятад хэл суръя 📚🇨🇳</p>
     <div class="cn">欢迎来到 ManGaLearn —— 用漫画学习中文</div>
   </header>
 
-  <!-- ABOUT -->
+  <!-- INTRO -->
   <div class="container">
     <h2>Бидний тухай</h2>
-    <p>
-      <strong>ManGaLearn</strong> бол ManGaLearn бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан энгийн, интерактив веб сайт юм.
-      Энд та Хятад хэл дээр манга уншиж, үгийн сангаа баяжуулж, дүрмийн мэдлэгээ сайжруулах боломжтой.
-    </p>
-    <p>
+    <p class="mn">
+      <strong>ManGaLearn</strong> бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан энгийн, интерактив веб сайт юм.<br>
+      Энд та Хятад хэл дээр манга уншиж, үгийн сангаа баяжуулж, дүрмийн мэдлэгээ сайжруулах боломжтой.<br>
       Хятад–Монгол орчуулга, үгсийн тайлбар болон сонирхолтой дасгалуудтай тул хэлээ хөгжилтэй, үр дүнтэй аргаар сайжруулах боломжтой.
     </p>
-
     <p class="cn">
-      ManGaLearn 是一个简洁、互动的网站，专为学习中文和提高阅读能力而设计。
-      在这里，你可以阅读中文漫画，丰富词汇量，并提高语法知识。
+      <strong>ManGaLearn</strong> 是一个简洁、互动的网站，专为学习中文和提高阅读能力而设计。<br>
+      在这里，你可以阅读中文漫画，丰富词汇量，并提高语法知识。<br>
       网站提供中蒙翻译、词汇注释和趣味练习，让你在轻松、有趣的方式中提高中文水平。
     </p>
-
-    <!-- CONTACT -->
-    <div class="contact">
-      <h2>Холбоо барих</h2>
-      <a href="mailto:nyamkhishig111@gmail.com">📧 Email</a>
-      <a href="https://instagram.com/nymkhshgg" target="_blank">📸 Instagram</a>
-    </div>
   </div>
 
+  <!-- MANAGA TEXT EXAMPLE -->
+  <div class="manga-text">
+    <p>
+      你好，<span class="word" data-pinyin="nǐ hǎo" data-meaning="Сайн уу">你好</span>！欢迎来到 
+      <span class="word" data-pinyin="Mángā" data-meaning="Манга">マンガ</span> 学习网站。
+    </p>
+    <p>
+      我喜欢 <span class="word" data-pinyin="dú mànhuà" data-meaning="манга унших">读漫画</span> 和 
+      <span class="word" data-pinyin="xué zhōngwén" data-meaning="Хятад хэл сурах">学中文</span>。
+    </p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact">
+    <h2>Холбоо барих</h2>
+    <a href="mailto:nyamkhishig111@gmail.com">📧 Email</a>
+    <a href="https://instagram.com/nymkhshgg" target="_blank">📸 Instagram</a>
+  </div>
+
+  <!-- FOOTER -->
   <footer>
-    © 2026 ManGaLearn • Created with NONAME❤️
+    © 2026 ManGaLearn • Created with ❤️
   </footer>
 
 </body>
 </html>
-
-
