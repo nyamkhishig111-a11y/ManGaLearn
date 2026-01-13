@@ -6,9 +6,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
 
+<style>
+/* ================= RESET ================= */
+* { box-sizing:border-box; margin:0; padding:0; }
+
+/* ================= BODY ================= */
+body {
+  font-family:'Roboto', Arial, sans-serif;
+  background: linear-gradient(180deg,#0b0b0b,#1a0000);
+  color: #e6e6e6;
+  overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ================= LINKS ================= */
+a { text-decoration:none; color:#ff4d4d; }
+
+/* ================= HEADER ================= */
+header {
+  position: sticky;
+  top:0;
+  z-index:100;
+  background:#0f0f0f;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 22px;
+  border-bottom:1px solid rgba(255,77,77,0.25);
+}
+.header-left { display:flex; align-items:center; gap:14px; }
+.logo { width:56px; height:56px; border-radius:50%; object-fit:cover; background:#000; box-shadow:0 0 12px rgba(255,77,77,0.5);}
+.site-title { font-size:22px; font-weight:700; }
+.nav { display:flex; gap:18px; }
+.nav a { font-weight:500; position:relative; }
+.nav a::after { content:""; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:#ff4d4d; transition:width 0.3s ease; }
+.nav a:hover::after { width:100%; }
+.theme-toggle { background:transparent; border:1px solid #ff4d4d; color:#ff4d4d; border-radius:20px; padding:6px 12px; cursor:pointer; font-size:16px; }
+
+/* ================= ABOUT SECTION ================= */
+.about-section {
+  max-width:900px;
+  margin:40px auto;
+  padding:24px;
+  background:#1a1a1a;
+  border-radius:14px;
+  color:#f1f1f1;
+  font-size:18px;
+  line-height:1.8;
+}
+body.light .about-section {
+  background:#fff;
+  color:#333;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+}
+.about-section h2 {
+  font-size:22px;
+  margin-bottom:12px;
+  color:#ff4d4d;
+}
+
+/* ================= PANELS ================= */
+.manga-panel-wrapper { display:flex; gap:18px; overflow-x:auto; padding:16px; scroll-snap-type:x mandatory; }
+.manga-panel-wrapper::-webkit-scrollbar { display:none; }
+.manga-panel { flex:0 0 260px; scroll-snap-align:start; background:#141414; border-radius:14px; box-shadow:0 6px 20px rgba(255,0,0,0.18); cursor:pointer; transition:transform 0.25s ease, box-shadow 0.25s ease;}
+.manga-panel.active { transform:scale(1.05); box-shadow:0 0 30px rgba(255,77,77,0.9); }
+
+/* ================= MANGA TEXT ================= */
+.manga-text { max-width:900px; margin:30px auto; padding:22px; background:#111; border-radius:16px; font-size:18px; line-height:2; position:relative;}
+.word { color:#ff4d4d; font-weight:bold; cursor:pointer; transition:all 0.3s ease;}
+.word:hover { text-shadow:0 0 6px rgba(255,77,77,0.9),0 0 14px rgba(255,0,0,0.6); }
+
+/* ================= TOOLTIP ================= */
+.tooltip { position:absolute; background:rgba(0,0,0,0.9); color:#fff; padding:6px 10px; border-radius:6px; font-size:14px; white-space:nowrap; transform:translate(-50%,-120%); pointer-events:none; opacity:0; transition:opacity 0.2s ease;}
+.tooltip.show { opacity:1; }
+
+/* ================= INK ================= */
+#ink { position:fixed; inset:0; background: radial-gradient(circle,#000 10%,transparent 11%); background-size:20px 20px; opacity:0; pointer-events:none; transition:opacity 0.4s ease; z-index:999;}
+#ink.show { opacity:1; }
+
+/* ================= FOOTER ================= */
+footer { text-align:center; padding:24px; color:#999; background:#0b0b0b; }
+
+/* ================= LIGHT THEME ================= */
+body.light { background:#f4f4f9; color:#333; }
+body.light header { background:#fff; }
+body.light .manga-panel, body.light .manga-text, body.light .about-section { background:#fff; box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+body.light footer { background:#f1f1f1; color:#666; }
+</style>
+
+</head>
 <body>
 
 <div id="ink"></div>
@@ -30,7 +117,16 @@
   <button id="themeToggle" class="theme-toggle">🌙</button>
 </header>
 
-<!-- WORD TEXT -->
+<!-- ABOUT SECTION -->
+<section class="about-section">
+  <h2>About ManGaLearn</h2>
+  <p>
+    ManGaLearn бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан вебсайт юм. 
+    Энд та Хятад–Монгол орчуулгатайгаар манга уншиж, үгийн сангаа баяжуулж, дүрмийн мэдлэгээ 
+    нэмэлт сонирхолтой дасгал ажиллан хятад хэлээ хялбар, үр дүнтэй аргаар сайжруулах боломжтой.
+  </p>
+</section>
+
 <div class="manga-text">
   <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу">你好</span>
   <span class="word" data-pinyin="Wǒmen" data-meaning="Бид">我们</span>
@@ -41,7 +137,6 @@
 
 <div id="tooltip" class="tooltip"></div>
 
-<!-- PANELS -->
 <div class="manga-panel-wrapper" id="panelWrapper">
   <div class="manga-panel">Lesson 1</div>
   <div class="manga-panel">Lesson 2</div>
@@ -54,86 +149,55 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", ()=>{
-
   /* SOUND ENGINE */
   const AudioCtx = window.AudioContext || window.webkitAudioContext;
   const audioCtx = new AudioCtx();
-  function uiSound(freq=400, vol=0.05) {
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    const o = audioCtx.createOscillator();
-    const g = audioCtx.createGain();
+  function uiSound(freq=400, vol=0.05){
+    if(audioCtx.state==="suspended") audioCtx.resume();
+    const o=audioCtx.createOscillator();
+    const g=audioCtx.createGain();
     o.connect(g); g.connect(audioCtx.destination);
-    o.frequency.value = freq; g.gain.value = vol;
-    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
-    o.start(); o.stop(audioCtx.currentTime + 0.12);
+    o.frequency.value=freq; g.gain.value=vol;
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime+0.12);
+    o.start(); o.stop(audioCtx.currentTime+0.12);
   }
 
   /* WORD CLICK → TOOLTIP + VOICE */
-  const tooltip = document.getElementById("tooltip");
-  let activeWord = null;
-
+  const tooltip=document.getElementById("tooltip");
+  let activeWord=null;
   document.querySelectorAll(".word").forEach(word=>{
     word.addEventListener("click", e=>{
       uiSound(600);
-
       if(activeWord===word){
-        tooltip.classList.remove("show");
-        word.classList.remove("active");
-        activeWord=null;
-        return;
+        tooltip.classList.remove("show"); word.classList.remove("active"); activeWord=null; return;
       }
-
       document.querySelectorAll(".word").forEach(w=>w.classList.remove("active"));
       word.classList.add("active");
-
-      tooltip.textContent = `${word.dataset.pinyin} — ${word.dataset.meaning}`;
-      tooltip.style.left = e.clientX + "px";
-      tooltip.style.top = e.clientY - 30 + "px";
+      tooltip.textContent=`${word.dataset.pinyin} — ${word.dataset.meaning}`;
+      tooltip.style.left=e.clientX+"px";
+      tooltip.style.top=e.clientY-30+"px";
       tooltip.classList.add("show");
-
-      activeWord = word;
-
-      const utter = new SpeechSynthesisUtterance(word.textContent);
-      utter.lang = "zh-CN";
+      activeWord=word;
+      const utter=new SpeechSynthesisUtterance(word.textContent);
+      utter.lang="zh-CN";
       speechSynthesis.cancel();
       speechSynthesis.speak(utter);
     });
   });
 
   /* PANELS SWIPE */
-  const wrapper = document.getElementById("panelWrapper");
+  const wrapper=document.getElementById("panelWrapper");
   let startX=0, currentX=0, velocity=0, dragging=false;
+  wrapper.addEventListener("touchstart", e=>{ startX=e.touches[0].clientX; dragging=true; });
+  wrapper.addEventListener("touchmove", e=>{ if(!dragging)return; currentX=e.touches[0].clientX; velocity=currentX-startX; wrapper.style.transform=`translateX(${velocity}px)`; });
+  wrapper.addEventListener("touchend", ()=>{ dragging=false; wrapper.style.transition="transform 0.4s ease-out"; wrapper.style.transform=`translateX(${velocity*0.3}px)`; setTimeout(()=>{ wrapper.style.transition=""; wrapper.style.transform=""; },400); });
 
-  wrapper.addEventListener("touchstart", e=>{
-    startX=e.touches[0].clientX;
-    dragging=true;
-  });
-  wrapper.addEventListener("touchmove", e=>{
-    if(!dragging) return;
-    currentX=e.touches[0].clientX;
-    velocity=currentX-startX;
-    wrapper.style.transform=`translateX(${velocity}px)`;
-  });
-  wrapper.addEventListener("touchend", ()=>{
-    dragging=false;
-    wrapper.style.transition="transform 0.4s ease-out";
-    wrapper.style.transform=`translateX(${velocity*0.3}px)`;
-    setTimeout(()=>{
-      wrapper.style.transition="";
-      wrapper.style.transform="";
-    }, 400);
-  });
-
-  /* DARK/LIGHT THEME + INK TRANSITION */
+  /* DARK/LIGHT THEME + INK */
   const ink=document.getElementById("ink");
-  document.getElementById("themeToggle").onclick = ()=>{
+  document.getElementById("themeToggle").onclick=()=>{
     ink.classList.add("show");
-    setTimeout(()=>{
-      document.body.classList.toggle("light");
-      ink.classList.remove("show");
-    }, 300);
+    setTimeout(()=>{ document.body.classList.toggle("light"); ink.classList.remove("show"); },300);
   };
-
 });
 </script>
 
