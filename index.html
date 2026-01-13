@@ -8,232 +8,86 @@
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Roboto', Arial, sans-serif;
-      background: #f4f4f9;
-      color: #333;
-      line-height: 1.8;
-      text-align: center;
-    }
-
-    a {
-      text-decoration: none;
-      color: #ff4500;
-    }
-
-    header {
-      background: linear-gradient(135deg, #ff0000, #ff4d4d);
-      color: white;
-      padding: 70px 20px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 48px;
-      font-weight: 700;
-    }
-
-    header p {
-      font-size: 20px;
-      margin-top: 12px;
-    }
-
-    header .cn {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 18px;
-      margin-top: 8px;
-      color: #ffe5e5;
-    }
-
-    .container {
-      display: inline-block;
-      text-align: center;
-      max-width: 850px;
-      margin: 40px auto 50px auto;
-      background: #fff8f5;
-      padding: 35px 25px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    }
-
-    .container h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .container p.mn {
-      font-size: 16px;
-      color: #333;
-      margin-bottom: 20px;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .container p.cn {
-      font-family: 'Noto Sans SC', sans-serif;
-      font-size: 18px;
-      color: #666;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .contact {
-      background: #fff;
-      padding: 30px 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      text-align: center;
-      max-width: 500px;
-      margin: 50px auto;
-    }
-
-    .contact a {
-      display: inline-block;
-      margin: 10px 15px;
-      font-weight: bold;
-      font-size: 16px;
-      color: #ff4500;
-      transition: all 0.3s ease;
-    }
-
-    .contact a:hover {
-      color: #ff0000;
-      transform: scale(1.05);
-    }
-
-    .manga-text {
-      max-width: 800px;
-      margin: 50px auto;
-      background: #fff;
-      padding: 25px 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      text-align: left;
-      font-size: 18px;
-      line-height: 2;
-    }
-
-    .manga-text span.word {
-      cursor: pointer;
-      position: relative;
-      color: #d32f2f;
-      font-weight: bold;
-    }
-
-    .manga-text span.word:hover::after {
-      content: attr(data-pinyin) " - " attr(data-meaning);
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.8);
-      color: #fff;
-      padding: 5px 8px;
-      border-radius: 5px;
-      white-space: nowrap;
-      font-size: 14px;
-      opacity: 1;
-      pointer-events: none;
-      z-index: 10;
-    }
-
-    .tooltip-click {
-      display: none;
-      position: absolute;
-      bottom: 120%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.9);
-      color: #fff;
-      padding: 8px 10px;
-      border-radius: 6px;
-      white-space: nowrap;
-      font-size: 14px;
-      z-index: 20;
-    }
-
-    .tooltip-active {
-      display: block;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      font-size: 14px;
-      color: #666;
-      background: #f4f4f4;
-    }
-
-    @media (max-width: 600px) {
-      header h1 { font-size: 36px; }
-      header p { font-size: 16px; }
-      header .cn { font-size: 16px; }
-      .container p.mn { font-size: 14px; }
-      .container p.cn { font-size: 16px; }
-      .manga-text { font-size: 16px; }
-    }
-  </style>
+  <!-- STYLE -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <h1>ManGaLearn-д тавтай морил</h1>
-    <p>Манга уншаад Хятад хэл суръя 📚🇨🇳</p>
-    <div class="cn">欢迎来到 ManGaLearn —— 用漫画学习中文</div>
-  </header>
+<!-- THEME TOGGLE -->
+<button id="themeToggle" class="theme-toggle">🌙</button>
 
-  <!-- INTRO -->
-  <div class="container">
-    <h2>Бидний тухай</h2>
-    <p class="mn">
-      <strong>ManGaLearn</strong> бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан энгийн, интерактив веб сайт юм.<br>
-      Энд та Хятад хэл дээр манга уншиж, үгийн сангаа баяжуулж, дүрмийн мэдлэгээ сайжруулах боломжтой.<br>
-      Хятад–Монгол орчуулга, үгсийн тайлбар болон сонирхолтой дасгалуудтай тул хэлээ хялбар, үр дүнтэй аргаар сайжруулах боломжтой.
-    </p>
-    <p class="cn">
-      <strong>ManGaLearn</strong> 是一个简洁、互动的网站，专为学习中文和提高阅读能力而设计。<br>
-      在这里，你可以阅读中文漫画，丰富词汇量，并提高语法知识。<br>
-      网站提供中蒙翻译、词汇注释和趣味练习，让你在简单、有趣的方式中提高中文水平。
-    </p>
-  </div>
+<!-- HEADER -->
+<header>
+  <h1>ManGaLearn-д тавтай морил</h1>
+  <p>Манга уншаад Хятад хэл суръя 📚🇨🇳</p>
+  <div class="cn">欢迎来到 ManGaLearn —— 用漫画学习中文</div>
+</header>
 
-  <!-- MANAGA TEXT EXAMPLE -->
-  <div class="manga-text">
-    <p>
-      <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好？</span>
-      <span class="word" data-pinyin="Wǒmen" data-meaning="Бүгдээрээ">我们</span>
-      <span class="word" data-pinyin="hé MangaLearn yīqǐ" data-meaning="ManGaLearn-тэй хамтдаа">和 ManGaLearn 一起</span>
-      <span class="word" data-pinyin="kuàilè de" data-meaning="хөгжилтэйгээр">快乐地</span>
-      <span class="word" data-pinyin="xuéxí yǔyán" data-meaning="хэлээ сайжруулцгаая!">学习语言！</span>
-      <span class="tooltip-click">Nǐ hǎo? - Сайн уу? |我们 - Бүгдээрээ |和 ManGaLearn 一起 - ManGaLearn-тэй хамтдаа | 快乐地 - хөгжилтэйгээр | 学习语言 - хэлээ сайжруулцгаая!</span>
-    </p>
-  </div>
+<!-- INTRO -->
+<div class="container">
+  <h2>Бидний тухай</h2>
+  <p class="mn">
+    <strong>ManGaLearn</strong> бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан веб сайт юм.
+  </p>
+  <p class="cn">
+    <strong>ManGaLearn</strong> 是一个用于学习中文并提高阅读能力的网站。
+  </p>
+</div>
 
-  <!-- CONTACT -->
-  <div class="contact">
-    <h2>Холбоо барих</h2>
-    <a href="mailto:nyamkhishig111@gmail.com">📧 Email</a>
-    <a href="https://instagram.com/nymkhshgg" target="_blank">📸 Instagram</a>
-  </div>
+<!-- MANGA TEXT -->
+<div class="manga-text">
+  <p>
+    <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好？</span>
+    <span class="word" data-pinyin="Wǒmen" data-meaning="Бүгдээрээ">我们</span>
+    <span class="word" data-pinyin="hé MangaLearn yīqǐ" data-meaning="ManGaLearn-тэй хамтдаа">和 ManGaLearn 一起</span>
+    <span class="word" data-pinyin="kuàilè de" data-meaning="хөгжилтэйгээр">快乐地</span>
+    <span class="word" data-pinyin="xuéxí yǔyán" data-meaning="хэлээ сайжруулцгаая!">学习语言！</span>
+    <span class="tooltip-click"></span>
+  </p>
+</div>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 ManGaLearn • Created with ❤️
-  </footer>
+<!-- MANGA PANEL SLIDE -->
+<div class="manga-panel-wrapper">
+  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+1" alt=""></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+2" alt=""></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+3" alt=""></div>
+</div>
 
-  <script>
-    document.querySelectorAll('.manga-text span.word').forEach(word => {
-      word.addEventListener('click', () => {
-        const tooltip = word.nextElementSibling;
-        if(tooltip && tooltip.classList.contains('tooltip-click')) {
-          tooltip.classList.toggle('tooltip-active');
-        }
-      });
+<!-- CONTACT -->
+<div class="contact">
+  <h2>Холбоо барих</h2>
+  <a href="mailto:nyamkhishig111@gmail.com">📧 Email</a>
+  <a href="https://instagram.com/nymkhshgg" target="_blank">📸 Instagram</a>
+  <br>
+  <a href="page2.html" class="nav-page">➡️ Дараагийн хуудас</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 ManGaLearn • Created with ❤️
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  // Word click tooltip + sound
+  const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3'); // sample click sound
+  document.querySelectorAll('.manga-text span.word').forEach(word => {
+    word.addEventListener('click', () => {
+      const tooltip = word.nextElementSibling;
+      if(tooltip && tooltip.classList.contains('tooltip-click')) {
+        tooltip.classList.toggle('tooltip-active');
+      }
+      audio.currentTime = 0;
+      audio.play();
     });
-  </script>
+  });
+
+  // THEME TOGGLE
+  const toggleBtn = document.getElementById('themeToggle');
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light');
+    toggleBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+  });
+</script>
 </body>
 </html>
-
