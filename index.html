@@ -8,6 +8,48 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+  <script>
+  // 🔊 Web Audio API sound engine
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audioCtx = new AudioCtx();
+
+  function playClickSound(type = "click") {
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
+
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    // 🔈 Sound types
+    if (type === "hover") {
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.03, audioCtx.currentTime);
+    } else {
+      oscillator.type = "square";
+      oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    }
+
+    gainNode.gain.exponentialRampToValueAtTime(
+      0.001,
+      audioCtx.currentTime + 0.12
+    );
+
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.12);
+  }
+
+  // 🎯 Attach to logo + social icons
+  document.querySelectorAll(".logo-link, .social-links a").forEach(el => {
+    el.addEventListener("mouseenter", () => playClickSound("hover"));
+    el.addEventListener("click", () => playClickSound("click"));
+  });
+</script>
 <body>
 
 <!-- HEADER -->
@@ -107,3 +149,4 @@ document.querySelectorAll('.nav-page').forEach(link => {
 </script>
 
 </
+
