@@ -1,152 +1,224 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8">
-  <title>ManGaLearn</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>ManGaLearn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+
+<style>
+/* ========== BASE ========== */
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background: #0f0f0f;
+  color: #eee;
+  transition: background 0.6s ease;
+  overflow-x: hidden;
+}
+body.light { background: #fafafa; color: #111; }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+}
+.logo { height: 48px; }
+.logo-link:hover { filter: drop-shadow(0 0 10px crimson); }
+
+.nav a {
+  margin: 0 12px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.theme-toggle {
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+/* ========== WORDS ========== */
+.manga-text {
+  font-size: 24px;
+  text-align: center;
+  margin: 60px 20px;
+}
+.word {
+  margin: 0 6px;
+  cursor: pointer;
+  color: crimson;
+}
+.word.active { text-shadow: 0 0 10px crimson; }
+
+.tooltip {
+  position: fixed;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.tooltip.show { opacity: 1; }
+
+/* ========== PANELS ========== */
+.manga-panel-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: hidden;
+}
+.manga-panel {
+  min-width: 240px;
+  height: 340px;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+/* ========== INK TRANSITION ========== */
+#ink {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #000 10%, transparent 11%);
+  background-size: 20px 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+#ink.show { opacity: 1; }
+</style>
 </head>
-  <script>
-  // 🔊 Web Audio API sound engine
-  const AudioCtx = window.AudioContext || window.webkitAudioContext;
-  const audioCtx = new AudioCtx();
 
-  function playClickSound(type = "click") {
-    if (audioCtx.state === "suspended") {
-      audioCtx.resume();
-    }
-
-    const oscillator = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
-
-    oscillator.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
-
-    // 🔈 Sound types
-    if (type === "hover") {
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
-      gainNode.gain.setValueAtTime(0.03, audioCtx.currentTime);
-    } else {
-      oscillator.type = "square";
-      oscillator.frequency.setValueAtTime(300, audioCtx.currentTime);
-      gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    }
-
-    gainNode.gain.exponentialRampToValueAtTime(
-      0.001,
-      audioCtx.currentTime + 0.12
-    );
-
-    oscillator.start();
-    oscillator.stop(audioCtx.currentTime + 0.12);
-  }
-
-  // 🎯 Attach to logo + social icons
-  document.querySelectorAll(".logo-link, .social-links a").forEach(el => {
-    el.addEventListener("mouseenter", () => playClickSound("hover"));
-    el.addEventListener("click", () => playClickSound("click"));
-  });
-</script>
 <body>
 
-<!-- HEADER -->
+<div id="ink"></div>
+
 <header>
-  <div class="header-left">
-    <img src="logo.png" alt="ManGaLearn Logo" class="logo">
-    <div class="site-title">ManGaLearn</div>
-  </div>
+  <a href="index.html" class="logo-link">
+    <img src="logo.png" class="logo">
+  </a>
 
   <nav class="nav">
     <a href="#">Home</a>
-    <a href="lessons.html" class="nav-page">Lessons</a>
-    <a href="about.html" class="nav-page">About</a>
+    <a href="#">Lessons</a>
+    <a href="#">About</a>
   </nav>
 
   <button id="themeToggle" class="theme-toggle">🌙</button>
 </header>
 
+<!-- WORD TEXT -->
+<div class="manga-text">
+  <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу">你好</span>
+  <span class="word" data-pinyin="Wǒmen" data-meaning="Бид">我们</span>
+  <span class="word" data-pinyin="Yìqǐ" data-meaning="Хамтдаа">一起</span>
+  <span class="word" data-pinyin="Xuéxí" data-meaning="Суралцъя">学习</span>
+  <span class="word" data-pinyin="Zhōngwén" data-meaning="Хятад хэл">中文</span>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+
 <!-- PANELS -->
-<h2 class="section-title">🔥 Latest Manga Lessons</h2>
-
-<div class="manga-panel-wrapper">
-  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+1"></div>
-  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+2"></div>
-  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+3"></div>
-  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+4"></div>
+<div class="manga-panel-wrapper" id="panelWrapper">
+  <div class="manga-panel">Lesson 1</div>
+  <div class="manga-panel">Lesson 2</div>
+  <div class="manga-panel">Lesson 3</div>
 </div>
 
-<!-- TEXT -->
-<div class="manga-text" id="mangaText">
-  <p>
-    <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好</span>
-    <span class="word" data-pinyin="Wǒmen" data-meaning="Бид">我们</span>
-    <span class="word" data-pinyin="yìqǐ" data-meaning="хамтдаа">一起</span>
-    <span class="word" data-pinyin="xuéxí" data-meaning="суралцъя">学习</span>
-    <span class="word" data-pinyin="Zhōngwén" data-meaning="Хятад хэл">中文</span>
-  </p>
-  <div id="tooltip" class="tooltip"></div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  © 2026 ManGaLearn • Learn Chinese through Manga
-</footer>
-
-<!-- ================= SCRIPTS ================= -->
 <script>
-/* THEME TOGGLE */
-const toggleBtn = document.getElementById('themeToggle');
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light');
-  toggleBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-});
+/* ========== SOUND ENGINE (UI) ========== */
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioCtx();
+function uiSound(freq=400, vol=0.05) {
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.connect(g); g.connect(audioCtx.destination);
+  o.frequency.value = freq; g.gain.value = vol;
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+  o.start(); o.stop(audioCtx.currentTime + 0.12);
+}
 
-/* WORD CLICK → TOOLTIP + SOUND */
-const tooltip = document.getElementById('tooltip');
-const wordSound = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
+/* ========== WORD CLICK → TOGGLE + AI VOICE ========== */
+const tooltip = document.getElementById("tooltip");
+let activeWord = null;
 
-document.querySelectorAll('.word').forEach(word => {
-  word.addEventListener('click', e => {
-    const rect = word.getBoundingClientRect();
-    tooltip.style.left = rect.left + rect.width / 2 + 'px';
-    tooltip.style.top = rect.top + window.scrollY + 'px';
-    tooltip.textContent = word.dataset.pinyin + " – " + word.dataset.meaning;
-    tooltip.classList.add('show');
+document.querySelectorAll(".word").forEach(word => {
+  word.addEventListener("click", e => {
+    uiSound(600);
 
-    wordSound.currentTime = 0;
-    wordSound.play();
+    if (activeWord === word) {
+      tooltip.classList.remove("show");
+      word.classList.remove("active");
+      activeWord = null;
+      return;
+    }
 
-    setTimeout(() => tooltip.classList.remove('show'), 1500);
+    document.querySelectorAll(".word").forEach(w => w.classList.remove("active"));
+    word.classList.add("active");
+
+    tooltip.textContent = `${word.dataset.pinyin} — ${word.dataset.meaning}`;
+    tooltip.style.left = e.clientX + "px";
+    tooltip.style.top = e.clientY - 30 + "px";
+    tooltip.classList.add("show");
+
+    activeWord = word;
+
+    /* AI VOICE */
+    const utter = new SpeechSynthesisUtterance(word.textContent);
+    utter.lang = "zh-CN";
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utter);
   });
 });
 
-/* PANEL CLICK → SOUND + HIGHLIGHT */
-const panelSound = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+/* ========== SWIPE + INERTIA PANELS ========== */
+const wrapper = document.getElementById("panelWrapper");
+let startX=0, currentX=0, velocity=0, dragging=false;
 
-document.querySelectorAll('.manga-panel').forEach(panel => {
-  panel.addEventListener('click', () => {
-    document.querySelectorAll('.manga-panel').forEach(p => p.classList.remove('active'));
-    panel.classList.add('active');
-
-    panelSound.currentTime = 0;
-    panelSound.play();
-  });
+wrapper.addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+  dragging = true;
+});
+wrapper.addEventListener("touchmove", e=>{
+  if(!dragging) return;
+  currentX = e.touches[0].clientX;
+  velocity = currentX - startX;
+  wrapper.style.transform = `translateX(${velocity}px)`;
+});
+wrapper.addEventListener("touchend", ()=>{
+  dragging = false;
+  wrapper.style.transition = "transform 0.4s ease-out";
+  wrapper.style.transform = `translateX(${velocity*0.3}px)`;
+  setTimeout(()=> {
+    wrapper.style.transition = "";
+    wrapper.style.transform = "";
+  }, 400);
 });
 
-/* PAGE TRANSITION */
-document.querySelectorAll('.nav-page').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-      window.location = link.href;
-    }, 400);
-  });
-});
+/* ========== DARK / LIGHT INK TRANSITION ========== */
+const ink = document.getElementById("ink");
+document.getElementById("themeToggle").onclick = () => {
+  ink.classList.add("show");
+  setTimeout(()=>{
+    document.body.classList.toggle("light");
+    ink.classList.remove("show");
+  }, 300);
+};
 </script>
 
-</
-
+</body>
+</html>
