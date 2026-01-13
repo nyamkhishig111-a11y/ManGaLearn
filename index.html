@@ -5,89 +5,105 @@
   <title>ManGaLearn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Noto+Sans+SC&display=swap" rel="stylesheet">
-
-  <!-- STYLE -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- THEME TOGGLE -->
-<button id="themeToggle" class="theme-toggle">🌙</button>
-
 <!-- HEADER -->
 <header>
-  <h1>ManGaLearn-д тавтай морил</h1>
-  <p>Манга уншаад Хятад хэл суръя 📚🇨🇳</p>
-  <div class="cn">欢迎来到 ManGaLearn —— 用漫画学习中文</div>
+  <div class="header-left">
+    <img src="logo.png" alt="ManGaLearn Logo" class="logo">
+    <div class="site-title">ManGaLearn</div>
+  </div>
+
+  <nav class="nav">
+    <a href="#">Home</a>
+    <a href="lessons.html" class="nav-page">Lessons</a>
+    <a href="about.html" class="nav-page">About</a>
+  </nav>
+
+  <button id="themeToggle" class="theme-toggle">🌙</button>
 </header>
 
-<!-- INTRO -->
-<div class="container">
-  <h2>Бидний тухай</h2>
-  <p class="mn">
-    <strong>ManGaLearn</strong> бол Хятад хэл сурах, унших чадвараа сайжруулахад зориулсан веб сайт юм.
-  </p>
-  <p class="cn">
-    <strong>ManGaLearn</strong> 是一个用于学习中文并提高阅读能力的网站。
-  </p>
-</div>
+<!-- PANELS -->
+<h2 class="section-title">🔥 Latest Manga Lessons</h2>
 
-<!-- MANGA TEXT -->
-<div class="manga-text">
-  <p>
-    <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好？</span>
-    <span class="word" data-pinyin="Wǒmen" data-meaning="Бүгдээрээ">我们</span>
-    <span class="word" data-pinyin="hé MangaLearn yīqǐ" data-meaning="ManGaLearn-тэй хамтдаа">和 ManGaLearn 一起</span>
-    <span class="word" data-pinyin="kuàilè de" data-meaning="хөгжилтэйгээр">快乐地</span>
-    <span class="word" data-pinyin="xuéxí yǔyán" data-meaning="хэлээ сайжруулцгаая!">学习语言！</span>
-    <span class="tooltip-click"></span>
-  </p>
-</div>
-
-<!-- MANGA PANEL SLIDE -->
 <div class="manga-panel-wrapper">
-  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+1" alt=""></div>
-  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+2" alt=""></div>
-  <div class="manga-panel"><img src="https://via.placeholder.com/300x400?text=Panel+3" alt=""></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+1"></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+2"></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+3"></div>
+  <div class="manga-panel"><img src="https://via.placeholder.com/260x360?text=Lesson+4"></div>
 </div>
 
-<!-- CONTACT -->
-<div class="contact">
-  <h2>Холбоо барих</h2>
-  <a href="mailto:nyamkhishig111@gmail.com">📧 Email</a>
-  <a href="https://instagram.com/nymkhshgg" target="_blank">📸 Instagram</a>
-  <br>
-  <a href="page2.html" class="nav-page">➡️ Дараагийн хуудас</a>
+<!-- TEXT -->
+<div class="manga-text" id="mangaText">
+  <p>
+    <span class="word" data-pinyin="Nǐ hǎo" data-meaning="Сайн уу?">你好</span>
+    <span class="word" data-pinyin="Wǒmen" data-meaning="Бид">我们</span>
+    <span class="word" data-pinyin="yìqǐ" data-meaning="хамтдаа">一起</span>
+    <span class="word" data-pinyin="xuéxí" data-meaning="суралцъя">学习</span>
+    <span class="word" data-pinyin="Zhōngwén" data-meaning="Хятад хэл">中文</span>
+  </p>
+  <div id="tooltip" class="tooltip"></div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  © 2026 ManGaLearn • Created with ❤️
+  © 2026 ManGaLearn • Learn Chinese through Manga
 </footer>
 
-<!-- SCRIPTS -->
+<!-- ================= SCRIPTS ================= -->
 <script>
-  // Word click tooltip + sound
-  const audio = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3'); // sample click sound
-  document.querySelectorAll('.manga-text span.word').forEach(word => {
-    word.addEventListener('click', () => {
-      const tooltip = word.nextElementSibling;
-      if(tooltip && tooltip.classList.contains('tooltip-click')) {
-        tooltip.classList.toggle('tooltip-active');
-      }
-      audio.currentTime = 0;
-      audio.play();
-    });
-  });
+/* THEME TOGGLE */
+const toggleBtn = document.getElementById('themeToggle');
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  toggleBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+});
 
-  // THEME TOGGLE
-  const toggleBtn = document.getElementById('themeToggle');
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light');
-    toggleBtn.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+/* WORD CLICK → TOOLTIP + SOUND */
+const tooltip = document.getElementById('tooltip');
+const wordSound = new Audio('https://www.soundjay.com/buttons/sounds/button-16.mp3');
+
+document.querySelectorAll('.word').forEach(word => {
+  word.addEventListener('click', e => {
+    const rect = word.getBoundingClientRect();
+    tooltip.style.left = rect.left + rect.width / 2 + 'px';
+    tooltip.style.top = rect.top + window.scrollY + 'px';
+    tooltip.textContent = word.dataset.pinyin + " – " + word.dataset.meaning;
+    tooltip.classList.add('show');
+
+    wordSound.currentTime = 0;
+    wordSound.play();
+
+    setTimeout(() => tooltip.classList.remove('show'), 1500);
   });
+});
+
+/* PANEL CLICK → SOUND + HIGHLIGHT */
+const panelSound = new Audio('https://www.soundjay.com/buttons/sounds/button-09.mp3');
+
+document.querySelectorAll('.manga-panel').forEach(panel => {
+  panel.addEventListener('click', () => {
+    document.querySelectorAll('.manga-panel').forEach(p => p.classList.remove('active'));
+    panel.classList.add('active');
+
+    panelSound.currentTime = 0;
+    panelSound.play();
+  });
+});
+
+/* PAGE TRANSITION */
+document.querySelectorAll('.nav-page').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+      window.location = link.href;
+    }, 400);
+  });
+});
 </script>
-</body>
-</html>
+
+</
