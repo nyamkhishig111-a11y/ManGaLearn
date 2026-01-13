@@ -1,0 +1,222 @@
+/* =========================
+   ManGaLearn Full Dark Theme
+   ========================= */
+
+/* BODY */
+body {
+  margin: 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(180deg, #0b0b0b, #1a0000);
+  color: #e0e0e0;
+  line-height: 1.8;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* LINKS */
+a {
+  text-decoration: none;
+  color: #ff4d4d;
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(135deg, #8b0000, #ff1a1a);
+  color: #ffffff;
+  padding: 70px 20px;
+}
+
+/* MAIN CONTENT */
+.container {
+  background: #141414;
+  color: #eaeaea;
+  box-shadow: 0 6px 25px rgba(255, 0, 0, 0.15);
+  border-radius: 20px;
+  margin: 40px auto 50px auto;
+  padding: 35px 25px;
+  max-width: 850px;
+  text-align: left;
+}
+
+/* TEXT */
+.container p.mn {
+  color: #e0e0e0;
+}
+
+.container p.cn {
+  color: #bfbfbf;
+}
+
+/* MANGA TEXT */
+.manga-text {
+  background: #111;
+  color: #f1f1f1;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.12);
+  border-radius: 15px;
+  margin: 50px auto;
+  padding: 25px 20px;
+  font-size: 18px;
+  line-height: 2;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.manga-text span.word {
+  color: #ff4d4d;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.manga-text span.word:hover {
+  text-shadow:
+    0 0 5px rgba(255, 77, 77, 0.8),
+    0 0 10px rgba(255, 77, 77, 0.6),
+    0 0 20px rgba(255, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+.tooltip-click {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.9);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  font-size: 14px;
+  z-index: 20;
+}
+
+.tooltip-active {
+  display: block;
+}
+
+/* CONTACT */
+.contact {
+  background: #141414;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.15);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.contact a {
+  color: #ff4d4d;
+  font-weight: bold;
+  font-size: 16px;
+  display: inline-block;
+  margin: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.contact a:hover {
+  color: #ff1a1a;
+  transform: scale(1.05);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  font-size: 14px;
+  color: #999;
+  background: #0b0b0b;
+}
+
+/* THEME TOGGLE */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #111;
+  color: #ff4d4d;
+  border: 2px solid #ff4d4d;
+  border-radius: 50px;
+  padding: 8px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: #ff4d4d;
+  color: #111;
+}
+
+/* LIGHT THEME */
+body.light {
+  background: #f4f4f9;
+  color: #333;
+}
+
+body.light header {
+  background: linear-gradient(135deg, #ff0000, #ff4d4d);
+}
+
+body.light .container,
+body.light .contact,
+body.light .manga-text {
+  background: #ffffff;
+  color: #333;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+body.light footer {
+  background: #f4f4f4;
+  color: #666;
+}
+
+/* =========================
+   MANGA PANEL SLIDE ANIMATION
+   ========================= */
+.manga-panel-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+.manga-panel {
+  flex: none;
+  width: 300px;
+  margin-right: 20px;
+  scroll-snap-align: start;
+  background: #222;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.manga-panel img {
+  width: 100%;
+  display: block;
+  border-radius: 15px 15px 0 0;
+}
+
+.manga-panel:hover {
+  transform: scale(1.03);
+}
+
+/* MOBILE SWIPE HINT */
+.manga-panel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  header h1 { font-size: 36px; }
+  header p { font-size: 16px; }
+  header .cn { font-size: 16px; }
+  .container p.mn { font-size: 14px; }
+  .container p.cn { font-size: 16px; }
+  .manga-text { font-size: 16px; }
+}
